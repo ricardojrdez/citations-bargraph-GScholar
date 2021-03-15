@@ -15,6 +15,8 @@ import logging
 import configparser
 import getopt
 import sys
+from datetime import datetime
+
 
 from matplotlib import rc
 rc('font',**{'family':'serif','serif':['Times']})
@@ -34,7 +36,7 @@ logger = logging.getLogger('main')
 
 script_name = os.path.basename(__file__)
 
-GSCHOLAR_ID='HlQC1OcAAAAJ'
+GSCHOLAR_ID=''
 GSCHOLAR_URL="https://scholar.google.es/citations?user="
 
 help= f'''usage: {script_name} [-h] [-f FILENAME] [-s start_year] [-e end_year] [-u GSCHOLAR_URL] GSCHOLAR_ID
@@ -108,7 +110,7 @@ def main(argv):
     years = years[idx_start:idx_end]
 
     cit_summary = get_citation_summary(soup)
-    generate_citation_bargraph(filename, years=years, cit_years=cit_years, name=researcher_name, university=researcher_affiliation, summary=cit_summary)
+    generate_citation_bargraph(filename, years=years, cit_years=cit_years, name=researcher_name, university=researcher_affiliation, summary=cit_summary, gscholar_id=gscholar_id)
 
 def get_citations_years(gscholar_url=GSCHOLAR_URL, gscholar_id=GSCHOLAR_ID):
     # build URL appropriately
@@ -152,7 +154,7 @@ def get_values_from(_regex_str, html=''):
         _list.append(int(_val))
     return _list
 
-def generate_citation_bargraph(filename, years: list, cit_years: list, name: str, university: str, summary: str):
+def generate_citation_bargraph(filename, years: list, cit_years: list, name: str, university: str, summary: str, gscholar_id: str):
     x = np.arange(len(years))  # the label locations
     width = 0.5  # the width of the bars
 
@@ -167,8 +169,12 @@ def generate_citation_bargraph(filename, years: list, cit_years: list, name: str
     summary_str = '[all] Citations: {}; h-index: {}; i10-index: {}'.format(summary[0], summary[2], summary[4])
 
     ax.set_ylabel('Citations')
-    ax.set_xlabel('Years')
-    ax.set_title('Citations per year' + _mean_str + '\nScholar: {} ({})\n{}'.format(name, university, summary_str))
+    ax.set_xlabel('Years\n' +
+                        '{\\small (data source: {\\tt ' + GSCHOLAR_URL + gscholar_id + '}; fetched on ' +  datetime.now().strftime("%d %b, %Y") + ')}')
+    ax.set_title('{\\bf Citations per year' + _mean_str + 
+                        '}\nScholar: {\\em ' + name + '} ' + '(' + university +
+                        ')\n' + summary_str
+                 )
     ax.set_xticks(x)
     ax.set_xticklabels(years)
 
