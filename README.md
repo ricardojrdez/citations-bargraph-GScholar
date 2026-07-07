@@ -8,7 +8,7 @@ This script relies on `BeautifulSoup` to scrap the HMTL and `matplotlib` to gene
 
 ## Requirements
 
-- Python 3 (see `requirements.txt` for the Python dependencies: BeautifulSoup, lxml, requests, numpy, and matplotlib)
+- Python 3.10 or later (see `requirements.txt` for the Python dependencies: BeautifulSoup, lxml, requests, numpy, and matplotlib)
 - A working LaTeX installation (the bargraph text is rendered with `text.usetex`)
 
 ## Usage
