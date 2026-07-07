@@ -127,3 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Generated bargraphs in the repo root (the example under images/ stays tracked)
+/*.pdf

@@ -8,8 +8,8 @@ This script relies on `BeautifulSoup` to scrap the HMTL and `matplotlib` to gene
 
 ## Requirements
 
-- Python 3.5 (tested on Python 3.8.4rc1 on top of Debian GNU/Linux bullseye/sid 8.11)
-- BeautifulSoup
+- Python 3 (see `requirements.txt` for the Python dependencies: BeautifulSoup, lxml, requests, numpy, and matplotlib)
+- A working LaTeX installation (the bargraph text is rendered with `text.usetex`)
 
 ## Usage
 
@@ -36,9 +36,7 @@ Options:
 $ python3 citations-bargraph-GScholar.py HlQC1OcAAAAJ
 ```
 
-It will generate a PDF file, containing the bargraph with citations per year of the Google Scholar profile indicated as parameter. For instance, the previous command will generate a PDF as this one:
-
-![example of bargraph](/images/2010_2021_RJRodriguez.pdf "Example of bargraph generated with the tool")
+It will generate a PDF file, containing the bargraph with citations per year of the Google Scholar profile indicated as parameter. For instance, the previous command will generate a PDF as [this example](images/2010_2021_RJRodriguez.pdf).
 
 
 ## License
